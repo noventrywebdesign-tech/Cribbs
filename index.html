@@ -93,8 +93,8 @@
   @media (prefers-reduced-motion: reduce) { .blade-reveal { display: none; } }
 
   /* ── NAV ── */
-  nav#siteNav { position: sticky; top: 0; z-index: 200; background: rgba(11,11,12,0.78); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); transition: background 200ms, border-color 200ms; }
-  nav#siteNav.scrolled { background: rgba(11,11,12,0.95); }
+  nav#siteNav { position: sticky; top: 0; z-index: 200; background: transparent; border-bottom: 1px solid transparent; transition: background-color 420ms ease, border-color 420ms ease; }
+  nav#siteNav.nav-solid { border-bottom-color: var(--line); }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; gap: 20px; }
   .nav-logo { font-family: var(--font-d); font-size: 1.12rem; font-weight: 600; letter-spacing: 0.01em; }
   .nav-logo span { display: block; font-family: var(--font-b); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--dim); margin-top: 2px; }
@@ -119,9 +119,14 @@
   }
 
   /* ── HERO ── */
-  .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
-  .hero-bg { position: absolute; inset: -8% 0 0 0; height: 116%; }
-  .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; will-change: transform; filter: grayscale(0.15) contrast(1.05); }
+  .hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
+  .hero-bg { position: absolute; inset: -8% 0 0 0; height: 116%; background: #0b0b0c; }
+  .hero-bg img, .hero-bg video { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; will-change: transform; filter: grayscale(0.15) contrast(1.05); }
+  .hero-bg video { display: block; pointer-events: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bg video { display: none; }
+    .hero-bg { background: url('images/hero-poster.jpg') center 38% / cover no-repeat; }
+  }
   .hero-scrim { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(11,11,12,0.98) 0%, rgba(11,11,12,0.5) 42%, rgba(11,11,12,0.28) 100%), linear-gradient(90deg, rgba(11,11,12,0.55) 0%, transparent 45%); }
   .hero-inner { position: relative; z-index: 2; padding: 150px 0 74px; width: 100%; }
   .hero-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--beige); margin-bottom: 30px; }
@@ -334,8 +339,16 @@
   </nav>
 
   <!-- Hero -->
-  <header class="hero" id="top">
-    <div class="hero-bg"><img src="images/hero-main.svg" alt="Cribbs Style Barbershop in Hemer – Fade Cut"></div>
+  <header class="hero" id="top" data-navbg="transparent">
+    <div class="hero-bg">
+      <video id="heroVideo" autoplay muted loop playsinline preload="auto"
+             poster="images/hero-poster.jpg"
+             aria-label="Cribbs Style Barbershop in Hemer – Fade Cut">
+        <source src="video/hero-mobile.mp4" type="video/mp4" media="(max-width: 768px)">
+        <source src="video/hero-desktop.mp4" type="video/mp4">
+        <img src="images/hero-main.svg" alt="Cribbs Style Barbershop in Hemer – Fade Cut">
+      </video>
+    </div>
     <div class="hero-scrim"></div>
     <div class="wrap hero-inner">
       <div class="hero-tag"><span class="dot"></span> Neu in Hemer · Fade · Cut · Style</div>
@@ -367,7 +380,7 @@
   </div>
 
   <!-- Über uns -->
-  <section id="ueber-uns">
+  <section id="ueber-uns" data-navbg="var(--bg)">
     <div class="wrap about-grid">
       <div class="about-media rv">
         <div class="m1"><img src="images/about-portrait.svg" alt="Cribbs Style bei der Arbeit"></div>
@@ -388,7 +401,7 @@
   </section>
 
   <!-- Leistungen -->
-  <section id="leistungen" style="background:var(--bg-2);">
+  <section id="leistungen" style="background:var(--bg-2);" data-navbg="var(--bg-2)">
     <div class="wrap">
       <div class="svc-head">
         <div class="eyebrow rv"><span class="num">02</span><span class="rule"></span>Leistungen</div>
@@ -448,7 +461,7 @@
   </section>
 
   <!-- Styles Galerie -->
-  <section id="styles">
+  <section id="styles" data-navbg="var(--bg)">
     <div class="wrap">
       <div class="gal-head">
         <div>
@@ -493,7 +506,7 @@
   </div>
 
   <!-- Salon -->
-  <section id="salon" style="background:var(--bg-2);">
+  <section id="salon" style="background:var(--bg-2);" data-navbg="var(--bg-2)">
     <div class="wrap">
       <div class="eyebrow rv"><span class="num">04</span><span class="rule"></span>Der Salon</div>
       <div class="salon-copy rv">
@@ -509,7 +522,7 @@
   </section>
 
   <!-- Instagram -->
-  <section id="instagram">
+  <section id="instagram" data-navbg="var(--bg)">
     <div class="wrap">
       <div class="ig-head">
         <div>
@@ -532,7 +545,7 @@
   </section>
 
   <!-- Standort -->
-  <section id="standort" style="background:var(--bg-2);">
+  <section id="standort" style="background:var(--bg-2);" data-navbg="var(--bg-2)">
     <div class="wrap">
       <div class="eyebrow rv"><span class="num">06</span><span class="rule"></span>Standort &amp; Kontakt</div>
       <div class="loc-grid">
@@ -559,7 +572,7 @@
   </section>
 
   <!-- FAQ -->
-  <section id="faq">
+  <section id="faq" data-navbg="var(--bg)">
     <div class="wrap">
       <div class="eyebrow rv"><span class="num">07</span><span class="rule"></span>FAQ</div>
       <h2 class="title rv" style="margin-bottom:50px;">Fragen &amp; Antworten.</h2>
@@ -589,7 +602,7 @@
   </section>
 
   <!-- CTA Closer -->
-  <section class="cta-closer">
+  <section class="cta-closer" data-navbg="transparent">
     <div class="bg"><img src="images/cta-bg.svg" alt="Cribbs Style Barbershop Hemer"></div>
     <div class="scrim"></div>
     <div class="wrap cta-inner">
@@ -602,7 +615,7 @@
   </section>
 
   <!-- Footer -->
-  <footer>
+  <footer data-navbg="var(--bg)">
     <div class="wrap">
       <div class="foot-top">
         <div>
@@ -646,9 +659,22 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.rv').forEach(function (el) { revealObserver.observe(el); });
 
-    /* Nav scroll state + mobile menu */
+    /* Nav: dynamic background color matching the section behind it + mobile menu */
     var nav = document.getElementById('siteNav');
-    window.addEventListener('scroll', function () { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+    var navColorEls = Array.prototype.slice.call(document.querySelectorAll('[data-navbg]'));
+    function updateNavColor() {
+      var probeY = nav.offsetHeight;
+      var current = navColorEls.length ? navColorEls[0] : null;
+      for (var i = 0; i < navColorEls.length; i++) {
+        if (navColorEls[i].getBoundingClientRect().top <= probeY) current = navColorEls[i];
+      }
+      var color = current ? current.getAttribute('data-navbg') : 'transparent';
+      nav.style.backgroundColor = color;
+      nav.classList.toggle('nav-solid', color !== 'transparent');
+    }
+    window.addEventListener('scroll', updateNavColor, { passive: true });
+    window.addEventListener('resize', updateNavColor);
+    updateNavColor();
     var burger = document.getElementById('navBurger');
     var navMobile = document.getElementById('navMobile');
     burger.addEventListener('click', function () {
@@ -663,7 +689,7 @@
     /* Hero parallax */
     (function () {
       if (reduceMotion) return;
-      var heroImg = document.querySelector('.hero-bg img');
+      var heroImg = document.querySelector('.hero-bg video, .hero-bg img');
       var hero = document.querySelector('.hero');
       if (!heroImg || !hero) return;
       window.addEventListener('scroll', function () {
@@ -673,6 +699,27 @@
         var shift = Math.min(window.scrollY * 0.18, maxShift);
         heroImg.style.transform = 'translateY(' + shift + 'px)';
       }, { passive: true });
+    })();
+
+    /* Hero video: reduced-motion opt-out + iOS/low-power autoplay retry */
+    (function () {
+      var v = document.getElementById('heroVideo');
+      if (!v) return;
+      if (reduceMotion) { v.removeAttribute('autoplay'); v.pause(); v.remove(); return; }
+      function tryPlay() {
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      }
+      tryPlay();
+      ['touchstart', 'click', 'scroll'].forEach(function (evt) {
+        window.addEventListener(evt, function once() {
+          if (v.paused) tryPlay();
+          window.removeEventListener(evt, once);
+        }, { passive: true });
+      });
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden && v.paused) tryPlay();
+      });
     })();
 
     /* Live open/closed status — real Cribbs Style hours: Mo–Fr 09:00–18:30, Sa 08:00–17:00, So geschlossen */

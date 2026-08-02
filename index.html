@@ -94,8 +94,26 @@
   @media (prefers-reduced-motion: reduce) { .blade-reveal { display: none; } }
 
   /* ── NAV ── */
-  nav#siteNav { position: sticky; top: 0; z-index: 200; background: transparent; border-bottom: 1px solid transparent; transition: background-color 420ms ease, border-color 420ms ease; }
-  nav#siteNav.nav-solid { border-bottom-color: var(--line); }
+  nav#siteNav {
+    position: sticky; top: 0; z-index: 200;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color 0.35s ease,
+      backdrop-filter 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+  nav#siteNav.is-scrolled {
+    background: rgba(8, 8, 8, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+  }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; gap: 20px; }
   .nav-logo { display: flex; align-items: center; }
   .nav-logo img { height: 62px; width: auto; display: block; }
@@ -395,7 +413,7 @@
   </nav>
 
   <!-- 1. Hero -->
-  <header class="hero" id="top" data-navbg="transparent">
+  <header class="hero" id="top">
     <div class="hero-bg">
       <video id="heroVideo" autoplay muted playsinline preload="auto"
              poster="images/hero-poster.jpg"
@@ -445,7 +463,7 @@
   </div>
 
   <!-- 2. Über Cribbs Style -->
-  <section id="ueber-uns" data-navbg="var(--bg)">
+  <section id="ueber-uns">
     <div class="wrap about-grid">
       <div class="about-media rv">
         <div class="m1"><img src="images/about-portrait.svg" alt="Cribbs Style bei der Arbeit"></div>
@@ -466,7 +484,7 @@
   </section>
 
   <!-- 3. Unsere Styles -->
-  <section id="styles" style="background:var(--bg-2);" data-navbg="var(--bg-2)">
+  <section id="styles" style="background:var(--bg-2);">
     <div class="wrap">
       <div class="gal-head">
         <div>
@@ -511,7 +529,7 @@
   </div>
 
   <!-- 4. Unsere Leistungen -->
-  <section id="leistungen" data-navbg="var(--bg)">
+  <section id="leistungen">
     <div class="wrap">
       <div class="svc-head">
         <div class="eyebrow rv"><span class="num">03</span><span class="rule"></span>Unsere Leistungen</div>
@@ -569,7 +587,7 @@
   </section>
 
   <!-- 5. Der Salon -->
-  <section id="salon" style="background:var(--bg-2);" data-navbg="var(--bg-2)">
+  <section id="salon" style="background:var(--bg-2);">
     <div class="wrap">
       <div class="eyebrow rv"><span class="num">04</span><span class="rule"></span>Der Salon</div>
       <div class="salon-copy rv">
@@ -585,7 +603,7 @@
   </section>
 
   <!-- 6. Warum Cribbs Style -->
-  <section id="warum" data-navbg="var(--bg)">
+  <section id="warum">
     <div class="wrap">
       <div class="why-head">
         <div class="eyebrow rv"><span class="num">05</span><span class="rule"></span>Warum Cribbs Style</div>
@@ -633,7 +651,7 @@
   </section>
 
   <!-- 7. Kundenbewertungen -->
-  <section id="bewertungen" style="background:var(--bg-2);" data-navbg="var(--bg-2)">
+  <section id="bewertungen" style="background:var(--bg-2);">
     <div class="wrap">
       <div class="eyebrow rv" style="justify-content:center;"><span class="num">06</span><span class="rule"></span>Kundenbewertungen</div>
       <div class="rev-inner rv">
@@ -649,7 +667,7 @@
   </section>
 
   <!-- 8. Instagram -->
-  <section id="instagram" data-navbg="var(--bg)">
+  <section id="instagram">
     <div class="wrap">
       <div class="ig-head">
         <div>
@@ -672,7 +690,7 @@
   </section>
 
   <!-- 9. FAQ -->
-  <section id="faq" style="background:var(--bg-2);" data-navbg="var(--bg-2)">
+  <section id="faq" style="background:var(--bg-2);">
     <div class="wrap">
       <div class="eyebrow rv"><span class="num">08</span><span class="rule"></span>FAQ</div>
       <h2 class="title rv" style="margin-bottom:50px;">Fragen &amp; Antworten.</h2>
@@ -702,7 +720,7 @@
   </section>
 
   <!-- 10. Termin vereinbaren (CTA Closer) -->
-  <section class="cta-closer" data-navbg="transparent">
+  <section class="cta-closer">
     <div class="bg"><img src="images/cta-bg.svg" alt="Cribbs Style Barbershop Hemer"></div>
     <div class="scrim"></div>
     <div class="wrap cta-inner">
@@ -715,7 +733,7 @@
   </section>
 
   <!-- 11. Kontakt -->
-  <section id="kontakt" data-navbg="var(--bg)">
+  <section id="kontakt">
     <div class="wrap">
       <div class="eyebrow rv"><span class="num">09</span><span class="rule"></span>Kontakt</div>
       <h2 class="title rv" style="margin-bottom:50px;">Komm vorbei –<br>oder schreib uns.</h2>
@@ -773,7 +791,7 @@
   </section>
 
   <!-- 12. Footer -->
-  <footer data-navbg="var(--bg)">
+  <footer>
     <div class="wrap">
       <div class="foot-top">
         <div>
@@ -818,22 +836,14 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.rv').forEach(function (el) { revealObserver.observe(el); });
 
-    /* Nav: dynamic background color matching the section behind it + mobile menu */
+    /* Nav: transparent at the very top, solid dark past a small scroll threshold + mobile menu */
     var nav = document.getElementById('siteNav');
-    var navColorEls = Array.prototype.slice.call(document.querySelectorAll('[data-navbg]'));
-    function updateNavColor() {
-      var probeY = nav.offsetHeight;
-      var current = navColorEls.length ? navColorEls[0] : null;
-      for (var i = 0; i < navColorEls.length; i++) {
-        if (navColorEls[i].getBoundingClientRect().top <= probeY) current = navColorEls[i];
-      }
-      var color = current ? current.getAttribute('data-navbg') : 'transparent';
-      nav.style.backgroundColor = color;
-      nav.classList.toggle('nav-solid', color !== 'transparent');
+    var NAV_SCROLL_THRESHOLD = 50;
+    function updateNavState() {
+      nav.classList.toggle('is-scrolled', window.scrollY > NAV_SCROLL_THRESHOLD);
     }
-    window.addEventListener('scroll', updateNavColor, { passive: true });
-    window.addEventListener('resize', updateNavColor);
-    updateNavColor();
+    window.addEventListener('scroll', updateNavState, { passive: true });
+    updateNavState();
     var burger = document.getElementById('navBurger');
     var navMobile = document.getElementById('navMobile');
     burger.addEventListener('click', function () {

@@ -115,8 +115,9 @@
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
   }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; gap: 20px; }
-  .nav-logo { display: flex; align-items: center; }
-  .nav-logo img { height: 62px; width: auto; display: block; }
+  .nav-logo { display: flex; align-items: center; gap: 14px; }
+  .nav-logo img { height: 46px; width: auto; display: block; flex-shrink: 0; }
+  .nav-logo-text { font-family: var(--font-d); font-weight: 700; font-size: 1.28rem; letter-spacing: 0.01em; color: #ffffff; white-space: nowrap; line-height: 1; }
   .nav-links { display: flex; gap: 32px; }
   .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--dim-2); transition: color 180ms; }
   .nav-links a:hover { color: var(--ink); }
@@ -130,11 +131,12 @@
   .nav-mobile.open { max-height: 560px; padding: 8px 32px 26px; }
   .nav-mobile a { padding: 14px 0; font-size: 0.95rem; color: var(--dim-2); border-bottom: 1px solid var(--line); }
   .nav-mobile a:last-child { border-bottom: none; }
-  @media (max-width: 860px) {
+  @media (max-width: 1000px) {
     .nav-links { display: none; }
     .nav-burger { display: flex; }
     .nav-mobile { display: flex; }
     .nav-right .btn { padding: 10px 16px; font-size: 0.78rem; }
+    .nav-logo-text { display: none; }
   }
 
   /* ── HERO ── */
@@ -384,7 +386,7 @@
   <!-- Nav -->
   <nav id="siteNav">
     <div class="wrap nav-inner">
-      <a href="#top" class="nav-logo"><img src="images/logo.png" alt="Cribbs Style"></a>
+      <a href="#top" class="nav-logo"><img src="images/logo.png" alt="Cribbs Style"><span class="nav-logo-text">Cribbs Style</span></a>
       <ul class="nav-links" id="navLinksDesktop">
         <li><a href="#ueber-uns">Über uns</a></li>
         <li><a href="#styles">Styles</a></li>

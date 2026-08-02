@@ -398,7 +398,7 @@
   <!-- 1. Hero -->
   <header class="hero" id="top" data-navbg="transparent">
     <div class="hero-bg">
-      <video id="heroVideo" autoplay muted loop playsinline preload="auto"
+      <video id="heroVideo" autoplay muted playsinline preload="auto"
              poster="images/hero-poster.jpg"
              aria-label="Cribbs Style Barbershop in Hemer – Fade Cut">
         <source src="video/hero-mobile.mp4" type="video/mp4" media="(max-width: 768px)">
@@ -862,21 +862,37 @@
     })();
 
     /* Hero video: reduced-motion opt-out + iOS/low-power autoplay retry.
-       Skips the first ~13s of the clip (dark close-up shots that read as
-       a black navbar) and loops within the brighter remainder instead. */
+       The clip's usable, well-lit stretch is roughly 13–17s (the mosaic-wall
+       shot); everything before 13s is dark close-ups and everything after
+       ~17s is a rougher profile-shot/transition. Rather than reacting to the
+       bad range after it's already visible (which left a gap where the very
+       first frame — or a frame right after the native loop restarts — could
+       flash before correction), the video is seeked to the good window
+       BEFORE playback ever starts, and looping between 13s/17s is done
+       manually so the browser never renders frame 0 at all. */
     (function () {
       var v = document.getElementById('heroVideo');
       if (!v) return;
       if (reduceMotion) { v.removeAttribute('autoplay'); v.pause(); v.remove(); return; }
-      var GOOD_START = 13;
-      v.addEventListener('timeupdate', function () {
-        if (v.currentTime < GOOD_START - 1) v.currentTime = GOOD_START;
-      });
+      v.removeAttribute('loop');
+      var RANGE_START = 13, RANGE_END = 17;
+
+      function seekToStart() {
+        try { v.currentTime = RANGE_START; } catch (e) {}
+      }
+      if (v.readyState >= 1) seekToStart();
+      else v.addEventListener('loadedmetadata', seekToStart, { once: true });
+
       function tryPlay() {
         var p = v.play();
         if (p && p.catch) p.catch(function () {});
       }
       tryPlay();
+
+      v.addEventListener('timeupdate', function () {
+        if (v.currentTime < RANGE_START - 0.5 || v.currentTime >= RANGE_END) seekToStart();
+      });
+
       ['touchstart', 'click', 'scroll'].forEach(function (evt) {
         window.addEventListener(evt, function once() {
           if (v.paused) tryPlay();

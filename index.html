@@ -87,7 +87,8 @@
   .nv-badge-logo { font-family: var(--font-d); font-size: 0.8rem; font-weight: 700; color: var(--beige); }
 
   /* ── PAGE-LOAD REVEAL (blade wipe) ── */
-  .blade-reveal { position: fixed; inset: 0; z-index: 800; background: var(--bg); animation: bladeUp 1.05s cubic-bezier(.76,0,.24,1) .25s forwards; }
+  .blade-reveal { position: fixed; inset: 0; z-index: 800; background: var(--bg) url('images/intro-still.jpg') center 32% / cover no-repeat; animation: bladeUp 1.1s cubic-bezier(.76,0,.24,1) .6s forwards; }
+  .blade-reveal::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,12,0.3) 0%, rgba(11,11,12,0.55) 100%); }
   .blade-reveal::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--beige) 20%, var(--ink) 50%, var(--beige) 80%, transparent); box-shadow: 0 0 26px 3px rgba(202,187,156,0.55); }
   @keyframes bladeUp { to { transform: translateY(-100%); } }
   @media (prefers-reduced-motion: reduce) { .blade-reveal { display: none; } }
@@ -96,8 +97,9 @@
   nav#siteNav { position: sticky; top: 0; z-index: 200; background: transparent; border-bottom: 1px solid transparent; transition: background-color 420ms ease, border-color 420ms ease; }
   nav#siteNav.nav-solid { border-bottom-color: var(--line); }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; gap: 20px; }
-  .nav-logo { display: flex; align-items: center; }
-  .nav-logo img { width: 46px; height: 46px; border-radius: 50%; display: block; }
+  .nav-logo { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .nav-logo img { width: 38px; height: 38px; display: block; }
+  .nav-logo-text { font-family: var(--font-d); font-size: 0.92rem; font-weight: 600; letter-spacing: 0.03em; color: var(--ink); white-space: nowrap; }
   .nav-links { display: flex; gap: 32px; }
   .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--dim-2); transition: color 180ms; }
   .nav-links a:hover { color: var(--ink); }
@@ -365,7 +367,7 @@
   <!-- Nav -->
   <nav id="siteNav">
     <div class="wrap nav-inner">
-      <a href="#top" class="nav-logo"><img src="images/logo.png" alt="Cribbs Style"></a>
+      <a href="#top" class="nav-logo"><img src="images/logo.png" alt="Cribbs Style"><span class="nav-logo-text">Cribbs Style</span></a>
       <ul class="nav-links" id="navLinksDesktop">
         <li><a href="#ueber-uns">Über uns</a></li>
         <li><a href="#styles">Styles</a></li>

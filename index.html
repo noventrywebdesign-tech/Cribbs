@@ -438,12 +438,12 @@
   }
 
   /* ── KONTAKT ── */
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-bottom: 64px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: stretch; margin-bottom: 64px; }
   .loc-row { display: flex; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid var(--line); }
   .loc-row span:first-child { color: var(--dim); font-size: 0.86rem; text-transform: uppercase; letter-spacing: 0.06em; }
   .loc-row span:last-child { font-weight: 600; text-align: right; }
   .loc-btns { display: flex; align-items: center; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
-  .map-frame { position: relative; width: 100%; aspect-ratio: 1/1; border: 1px solid var(--line); overflow: hidden; }
+  .map-frame { position: relative; width: 100%; height: 100%; border: 1px solid var(--line); overflow: hidden; }
   .map-frame iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.7) contrast(1.12) brightness(0.8); transition: filter var(--dur-slow) var(--ease); }
   .map-frame:hover iframe { filter: grayscale(0.4) contrast(1.08) brightness(0.92); }
   .map-frame::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,12,0.4), rgba(11,11,12,0.05) 45%, rgba(11,11,12,0.45)); pointer-events: none; }
@@ -453,7 +453,7 @@
   .map-pin-text strong { display: block; font-family: var(--font-d); font-size: 0.95rem; font-weight: 400; }
   .map-pin-text span { display: block; font-size: 0.8rem; color: var(--dim); margin-top: 2px; }
   @media (max-width: 700px) { .map-pin-card { left: 14px; bottom: 14px; padding: 12px 16px; } .map-pin-text span { font-size: 0.74rem; } }
-  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 50px; } .map-frame { aspect-ratio: 4/3.4; } }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 50px; } .map-frame { height: auto; aspect-ratio: 4/3.4; } }
 
   /* ── FOOTER ── */
   footer { padding: 90px 0 34px; border-top: 1px solid var(--line); }
@@ -861,11 +861,10 @@
   <!-- 11. Kontakt -->
   <section id="kontakt">
     <div class="wrap">
-      <div class="eyebrow rv"><span class="num">09</span><span class="rule"></span>Kontakt</div>
-      <h2 class="title rv" style="margin-bottom:50px;">Komm vorbei.</h2>
-
       <div class="contact-grid">
         <div class="rv">
+          <div class="eyebrow"><span class="num">09</span><span class="rule"></span>Kontakt</div>
+          <h2 class="title" style="margin-bottom:50px;">Komm vorbei.</h2>
           <div class="loc-row"><span>Adresse</span><span>Hauptstraße 267<br>58675 Hemer</span></div>
           <div class="loc-row"><span>Telefon</span><span><a href="tel:+491621388205">+49 162 1388205</a></span></div>
           <div class="loc-row"><span>Montag – Freitag</span><span>09:00 – 18:00 Uhr</span></div>

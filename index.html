@@ -132,12 +132,14 @@
   .intro-stage { position: relative; width: min(42vw, 240px); aspect-ratio: 200/300; }
   .intro-portrait-group, .intro-scissors-group { position: absolute; inset: 0; }
   .intro-head { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .intro-face-fill, .intro-hair-fill, .intro-mustache-fill { stroke-width: 1.5; opacity: 0; }
-  .intro-face-fill, .intro-hair-fill { fill: url(#introFillGrad); stroke: url(#introGrad); }
+  .intro-face-fill, .intro-hair-fill, .intro-mustache-fill, .intro-sideburn-fill { stroke-width: 1.5; opacity: 0; }
+  .intro-face-fill, .intro-hair-fill, .intro-sideburn-fill { fill: url(#introFillGrad); stroke: url(#introGrad); }
   .intro-mustache-fill { fill: url(#introFillGrad); stroke: url(#introGrad); stroke-width: 1.3; }
-  .intro-feature { fill: none; stroke: url(#introGrad); stroke-width: 2; stroke-linecap: round; opacity: 0; }
+  .intro-feature { fill: none; stroke: url(#introGrad); stroke-width: 2.6; stroke-linecap: round; opacity: 0; }
   .intro-feature-soft { fill: none; stroke: #0a0908; stroke-width: 1.6; stroke-linecap: round; opacity: 0; }
-  .intro-scissors { position: absolute; top: 2.2%; left: 32%; width: 34%; height: 27.2%; overflow: visible; transform-origin: 50% 7.5%; opacity: 0; }
+  .intro-hairstrand { fill: none; stroke: #0a0908; stroke-width: 1.4; stroke-linecap: round; opacity: 0; }
+  .intro-pupil { fill: url(#introGrad); opacity: 0; }
+  .intro-scissors { position: absolute; top: 4.4%; left: 32%; width: 34%; height: 27.2%; overflow: visible; transform-origin: 50% 7.5%; opacity: 0; }
   .intro-blade path, .intro-blade ellipse { fill: none; stroke: #cabb9c; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
   .intro-blade-a, .intro-blade-b { transform-origin: 50px 55px; }
   .intro-blade-a { transform: rotate(14deg); }
@@ -157,9 +159,12 @@
 
   .intro-screen.intro-run .intro-face-fill,
   .intro-screen.intro-run .intro-hair-fill,
+  .intro-screen.intro-run .intro-sideburn-fill,
   .intro-screen.intro-run .intro-mustache-fill,
   .intro-screen.intro-run .intro-feature,
-  .intro-screen.intro-run .intro-feature-soft { animation: introFillIn 550ms ease 100ms forwards; }
+  .intro-screen.intro-run .intro-feature-soft,
+  .intro-screen.intro-run .intro-hairstrand,
+  .intro-screen.intro-run .intro-pupil { animation: introFillIn 550ms ease 100ms forwards; }
   .intro-screen.intro-run .intro-scissors { animation: introScissorsIn 270ms cubic-bezier(.3,0,.2,1) 630ms forwards; }
   .intro-screen.intro-run .intro-blade-a { animation: snipA1 180ms ease-in-out 850ms forwards, snipA2 180ms ease-in-out 1030ms forwards, snipA3 150ms ease-in-out 1190ms forwards; }
   .intro-screen.intro-run .intro-blade-b { animation: snipB1 180ms ease-in-out 850ms forwards, snipB2 180ms ease-in-out 1030ms forwards, snipB3 150ms ease-in-out 1190ms forwards; }
@@ -544,7 +549,7 @@
   <div class="intro-screen" id="introScreen" aria-hidden="true">
     <div class="intro-stage">
       <div class="intro-portrait-group">
-        <svg class="intro-head" viewBox="50 25 200 300">
+        <svg class="intro-head" viewBox="50 15 200 300">
           <defs>
             <linearGradient id="introGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#f3efe7"/>
@@ -570,45 +575,72 @@
             C90,105 115,96 150,95
             Z
           "/>
+          <path class="intro-sideburn-fill" d="M186,112 C196,120 202,140 200,165 C198,185 190,200 182,208 L178,200 C186,190 192,175 193,158 C194,138 190,122 182,114 Z"/>
+          <path class="intro-sideburn-fill" d="M114,112 C104,120 98,140 100,165 C102,185 110,200 118,208 L122,200 C114,190 108,175 107,158 C106,138 110,122 118,114 Z"/>
           <path class="intro-hair-fill" d="
-            M150,28
-            C190,29 222,45 235,72
-            C244,90 240,110 225,128
-            C212,136 198,130 188,120
-            C180,113 170,110 150,110
-            C130,110 120,113 112,120
-            C102,130 88,136 75,128
-            C60,110 56,90 65,72
-            C78,45 110,29 150,28
+            M120,30
+            C155,20 195,24 220,42
+            C240,57 248,78 240,98
+            C232,116 216,124 202,120
+            C210,110 212,98 205,88
+            C196,96 184,102 170,102
+            C178,94 182,84 178,74
+            C168,84 152,90 136,88
+            C144,80 146,70 140,62
+            C128,72 112,78 98,74
+            C86,88 80,104 84,120
+            C68,122 55,112 50,94
+            C45,74 55,52 78,40
+            C92,33 106,29 120,30
             Z
           "/>
-          <path class="intro-feature" d="M112,158 C120,152 130,150 140,152"/>
-          <path class="intro-feature" d="M188,158 C180,152 170,150 160,152"/>
-          <path class="intro-feature" d="M114,170 C119,166 128,166 133,170"/>
-          <path class="intro-feature" d="M186,170 C181,166 172,166 167,170"/>
-          <path class="intro-feature-soft" d="M147,178 C144,190 142,200 145,208 C146,211 150,212 154,210"/>
+          <g class="intro-hairstrand">
+            <path d="M100,50 C112,44 126,42 138,44"/>
+            <path d="M90,64 C104,56 120,52 134,54"/>
+            <path d="M84,80 C98,70 116,64 132,66"/>
+            <path d="M150,40 C162,34 176,33 188,37"/>
+            <path d="M160,56 C174,49 190,48 202,53"/>
+            <path d="M172,72 C186,65 202,64 214,70"/>
+          </g>
+          <path class="intro-feature" d="M108,155 C118,146 132,144 144,148"/>
+          <path class="intro-feature" d="M192,155 C182,146 168,144 156,148"/>
+          <path class="intro-feature" d="M113,170 C118,165 128,165 133,170 C128,174 118,174 113,170 Z"/>
+          <path class="intro-feature" d="M187,170 C182,165 172,165 167,170 C172,174 182,174 187,170 Z"/>
+          <circle class="intro-pupil" cx="123" cy="170" r="3.2"/>
+          <circle class="intro-pupil" cx="177" cy="170" r="3.2"/>
+          <path class="intro-feature-soft" d="M147,180 C144,192 142,202 145,210 C146,213 150,214 154,212"/>
           <path class="intro-mustache-fill" d="
-            M150,214
-            C144,210 132,208 120,212
-            C108,216 100,224 98,232
-            C104,228 112,225 120,226
-            C128,227 136,224 141,218
-            C144,215 147,214 150,214
-            C153,214 156,215 159,218
-            C164,224 172,227 180,226
-            C188,225 196,228 202,232
-            C200,224 192,216 180,212
-            C168,208 156,210 150,214
+            M150,216
+            C144,212 133,209 121,211
+            C106,213 94,220 88,230
+            C86,236 88,240 93,238
+            C98,236 100,230 108,226
+            C116,222 122,224 118,232
+            C114,240 106,244 96,244
+            C102,248 112,248 120,244
+            C130,240 138,232 141,222
+            C143,218 146,216 150,216
+            C154,216 157,218 159,222
+            C162,232 170,240 180,244
+            C188,248 198,248 204,244
+            C194,244 186,240 182,232
+            C178,224 184,222 192,226
+            C200,230 202,236 207,238
+            C212,240 214,236 212,230
+            C206,220 194,213 179,211
+            C167,209 156,212 150,216
             Z
           "/>
           <g class="intro-feature-soft">
-            <path d="M85,190 C90,205 92,222 90,238"/>
-            <path d="M100,215 C104,230 105,246 100,260"/>
-            <path d="M118,235 C120,248 119,260 113,270"/>
-            <path d="M215,190 C210,205 208,222 210,238"/>
-            <path d="M200,215 C196,230 195,246 200,260"/>
-            <path d="M182,235 C180,248 181,260 187,270"/>
-            <path d="M150,240 C150,252 150,264 150,274"/>
+            <path d="M82,188 C86,208 87,230 82,250 C79,262 76,272 74,280"/>
+            <path d="M98,212 C102,232 102,252 96,268 C93,278 90,286 88,292"/>
+            <path d="M116,232 C118,248 117,264 111,276 C108,283 105,289 103,294"/>
+            <path d="M134,248 C135,260 133,272 128,282"/>
+            <path d="M218,188 C214,208 213,230 218,250 C221,262 224,272 226,280"/>
+            <path d="M202,212 C198,232 198,252 204,268 C207,278 210,286 212,292"/>
+            <path d="M184,232 C182,248 183,264 189,276 C192,283 195,289 197,294"/>
+            <path d="M166,248 C165,260 167,272 172,282"/>
+            <path d="M150,244 C150,258 150,270 150,280"/>
           </g>
         </svg>
         <div class="intro-scissors-group">

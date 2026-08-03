@@ -125,46 +125,61 @@
   }
 
 
-  /* ── CINEMATIC INTRO (first visit only) ── */
+  /* ── CINEMATIC INTRO (plays on every full page load) ── */
   html.intro-lock, html.intro-lock body { overflow: hidden; height: 100%; }
-  .intro-screen { position: fixed; inset: 0; z-index: 950; background: #000; display: flex; align-items: center; justify-content: center; }
+  .intro-screen { position: fixed; inset: 0; z-index: 99999; background: #050505; display: flex; align-items: center; justify-content: center; }
   .intro-screen.intro-skip { display: none !important; }
-  .intro-stage { position: relative; width: min(46vw, 300px); aspect-ratio: 320/360; }
-  .intro-portrait { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .intro-portrait-path { fill: none; stroke: url(#introGrad); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
-  .intro-scissors { position: absolute; top: 53.8%; left: 53.5%; width: 38.2%; height: 40.7%; overflow: visible; transform-origin: 50% 7.5%; opacity: 0; }
-  .intro-blade path, .intro-blade ellipse { fill: none; stroke: #cabb9c; stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+  .intro-stage { position: relative; width: min(50vw, 340px); aspect-ratio: 340/380; }
+  .intro-head { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .intro-head-fill, .intro-ear-fill { stroke-width: 1.5; opacity: 0; }
+  .intro-head-fill { fill: url(#introFillGrad); stroke: url(#introGrad); }
+  .intro-ear-fill { fill: url(#introFillGrad); stroke: url(#introGrad); stroke-width: 1; }
+  .intro-hairline { fill: none; stroke: #0a0a0a; stroke-width: 2; stroke-linecap: round; opacity: 0; }
+  .intro-scissors { position: absolute; top: 15.2%; left: 35.9%; width: 33%; height: 33%; overflow: visible; transform-origin: 50% 7.5%; opacity: 0; }
+  .intro-blade path, .intro-blade ellipse { fill: none; stroke: #cabb9c; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
   .intro-blade-a, .intro-blade-b { transform-origin: 50px 55px; }
   .intro-blade-a { transform: rotate(14deg); }
   .intro-blade-b { transform: rotate(-14deg); }
   .intro-hairs { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
-  .intro-hair { position: absolute; width: 11px; height: 2px; border-radius: 2px; background: #cabb9c; opacity: 0; }
-  .intro-hair.ih1 { top: 56%; left: 74%; }
-  .intro-hair.ih2 { top: 58%; left: 71%; }
-  .intro-hair.ih3 { top: 55%; left: 77%; }
-  .intro-logo { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.92); }
-  .intro-logo img { height: 56px; width: auto; }
+  .intro-hair { position: absolute; width: 10px; height: 2px; border-radius: 2px; background: #cabb9c; opacity: 0; }
+  .intro-hair.ih1 { top: 15%; left: 49%; }
+  .intro-hair.ih2 { top: 16%; left: 53%; }
+  .intro-hair.ih3 { top: 14%; left: 51%; }
+  .intro-hair.ih4 { top: 16%; left: 55%; }
+  .intro-hair.ih5 { top: 15%; left: 47%; }
+  .intro-hair.ih6 { top: 17%; left: 52%; }
+  .intro-logo-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.85); }
+  .intro-logo-wrap img { height: 120px; width: auto; }
+  @media (max-width: 480px) { .intro-logo-wrap img { height: 88px; } }
 
-  .intro-screen.intro-run .intro-portrait-path { animation: introDraw 1100ms cubic-bezier(.5,0,.3,1) 150ms forwards; }
-  .intro-screen.intro-run .intro-scissors { animation: introScissorsIn 400ms cubic-bezier(.3,0,.2,1) 1150ms forwards; }
-  .intro-screen.intro-run .intro-blade-a { animation: snipA 260ms ease-in-out 1450ms forwards; }
-  .intro-screen.intro-run .intro-blade-b { animation: snipB 260ms ease-in-out 1450ms forwards; }
-  .intro-screen.intro-run .intro-hair.ih1 { animation: hairFall1 420ms cubic-bezier(.4,0,.7,1) 1650ms forwards; }
-  .intro-screen.intro-run .intro-hair.ih2 { animation: hairFall2 450ms cubic-bezier(.4,0,.7,1) 1680ms forwards; }
-  .intro-screen.intro-run .intro-hair.ih3 { animation: hairFall3 390ms cubic-bezier(.4,0,.7,1) 1660ms forwards; }
-  .intro-screen.intro-run .intro-portrait-group { animation: introGroupOut 350ms ease 2000ms forwards; }
-  .intro-screen.intro-run .intro-logo { animation: introLogoIn 400ms cubic-bezier(.16,.84,.44,1) 1950ms forwards; }
-  .intro-screen.intro-run { animation: introScreenOut 400ms cubic-bezier(.6,0,.4,1) 2850ms forwards; }
+  .intro-screen.intro-run .intro-head-fill { animation: introFillIn 500ms ease 550ms forwards; }
+  .intro-screen.intro-run .intro-ear-fill { animation: introFillIn 400ms ease 650ms forwards; }
+  .intro-screen.intro-run .intro-hairline { animation: introFillIn 400ms ease 750ms forwards; }
+  .intro-screen.intro-run .intro-scissors { animation: introScissorsIn 350ms cubic-bezier(.3,0,.2,1) 950ms forwards; }
+  .intro-screen.intro-run .intro-blade-a { animation: snipA1 200ms ease-in-out 1250ms, snipA2 200ms ease-in-out 1450ms, snipA3 200ms ease-in-out 1650ms; animation-fill-mode: forwards; }
+  .intro-screen.intro-run .intro-blade-b { animation: snipB1 200ms ease-in-out 1250ms, snipB2 200ms ease-in-out 1450ms, snipB3 200ms ease-in-out 1650ms; animation-fill-mode: forwards; }
+  .intro-screen.intro-run .intro-hair.ih1 { animation: hairFall1 300ms cubic-bezier(.4,0,.7,1) 1300ms forwards; }
+  .intro-screen.intro-run .intro-hair.ih2 { animation: hairFall2 320ms cubic-bezier(.4,0,.7,1) 1320ms forwards; }
+  .intro-screen.intro-run .intro-hair.ih3 { animation: hairFall1 300ms cubic-bezier(.4,0,.7,1) 1500ms forwards; }
+  .intro-screen.intro-run .intro-hair.ih4 { animation: hairFall2 320ms cubic-bezier(.4,0,.7,1) 1520ms forwards; }
+  .intro-screen.intro-run .intro-hair.ih5 { animation: hairFall1 300ms cubic-bezier(.4,0,.7,1) 1700ms forwards; }
+  .intro-screen.intro-run .intro-hair.ih6 { animation: hairFall2 320ms cubic-bezier(.4,0,.7,1) 1720ms forwards; }
+  .intro-screen.intro-run .intro-portrait-group { animation: introGroupOut 350ms ease 1950ms forwards; }
+  .intro-screen.intro-run .intro-logo-wrap { animation: introLogoPop 550ms cubic-bezier(.22,.61,.36,1) 2150ms forwards; }
+  .intro-screen.intro-run { animation: introScreenOut 400ms cubic-bezier(.6,0,.4,1) 3600ms forwards; }
 
-  @keyframes introDraw { to { stroke-dashoffset: 0; } }
-  @keyframes introScissorsIn { 0% { opacity: 0; transform: rotate(-95deg) translate(16px,-12px); } 100% { opacity: 1; transform: rotate(-95deg) translate(0,0); } }
-  @keyframes snipA { 0% { transform: rotate(14deg); } 55% { transform: rotate(-3deg); } 100% { transform: rotate(6deg); } }
-  @keyframes snipB { 0% { transform: rotate(-14deg); } 55% { transform: rotate(3deg); } 100% { transform: rotate(-6deg); } }
-  @keyframes hairFall1 { 0% { opacity: 1; transform: translate(0,0) rotate(0deg); } 100% { opacity: 0; transform: translate(9px, 60px) rotate(80deg); } }
-  @keyframes hairFall2 { 0% { opacity: 1; transform: translate(0,0) rotate(0deg); } 100% { opacity: 0; transform: translate(-6px, 66px) rotate(-70deg); } }
-  @keyframes hairFall3 { 0% { opacity: 1; transform: translate(0,0) rotate(0deg); } 100% { opacity: 0; transform: translate(12px, 54px) rotate(60deg); } }
+  @keyframes introFillIn { to { opacity: 1; } }
+  @keyframes introScissorsIn { 0% { opacity: 0; transform: rotate(200deg) translate(0,-22px); } 100% { opacity: 1; transform: rotate(200deg) translate(0,0); } }
+  @keyframes snipA1 { 0% { transform: rotate(14deg); } 50% { transform: rotate(-3deg); } 100% { transform: rotate(14deg); } }
+  @keyframes snipB1 { 0% { transform: rotate(-14deg); } 50% { transform: rotate(3deg); } 100% { transform: rotate(-14deg); } }
+  @keyframes snipA2 { 0% { transform: rotate(14deg); } 50% { transform: rotate(-3deg); } 100% { transform: rotate(14deg); } }
+  @keyframes snipB2 { 0% { transform: rotate(-14deg); } 50% { transform: rotate(3deg); } 100% { transform: rotate(-14deg); } }
+  @keyframes snipA3 { 0% { transform: rotate(14deg); } 50% { transform: rotate(-3deg); } 100% { transform: rotate(6deg); } }
+  @keyframes snipB3 { 0% { transform: rotate(-14deg); } 50% { transform: rotate(3deg); } 100% { transform: rotate(-6deg); } }
+  @keyframes hairFall1 { 0% { opacity: 1; transform: translate(0,0) rotate(0deg); } 100% { opacity: 0; transform: translate(8px, 46px) rotate(75deg); } }
+  @keyframes hairFall2 { 0% { opacity: 1; transform: translate(0,0) rotate(0deg); } 100% { opacity: 0; transform: translate(-7px, 50px) rotate(-65deg); } }
   @keyframes introGroupOut { to { opacity: 0; } }
-  @keyframes introLogoIn { to { opacity: 1; transform: scale(1); } }
+  @keyframes introLogoPop { 0% { opacity: 0; transform: scale(0.85); } 65% { opacity: 1; transform: scale(1.08); } 100% { opacity: 1; transform: scale(1); } }
   @keyframes introScreenOut { to { opacity: 0; visibility: hidden; } }
 
   @media (prefers-reduced-motion: reduce) { .intro-screen { display: none !important; } }
@@ -522,25 +537,49 @@
   <div class="intro-screen" id="introScreen" aria-hidden="true">
     <div class="intro-stage">
       <div class="intro-portrait-group">
-        <svg class="intro-portrait" viewBox="0 0 320 360">
+        <svg class="intro-head" viewBox="0 0 340 380">
           <defs>
             <linearGradient id="introGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#f3efe7"/>
               <stop offset="100%" stop-color="#cabb9c"/>
             </linearGradient>
+            <linearGradient id="introFillGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#3a3632"/>
+              <stop offset="100%" stop-color="#18100a"/>
+            </linearGradient>
           </defs>
-          <path class="intro-portrait-path" pathLength="1" d="
-            M105,55
-            C140,45 168,55 180,85
-            C183,90 188,95 190,100
-            C198,112 212,125 224,142
-            C218,150 206,150 202,155
-            C204,159 206,162 203,166
-            C230,173 252,193 252,220
-            C252,248 230,268 195,272
-            C175,275 168,285 163,300
-            C158,315 145,325 125,335
+          <path class="intro-head-fill" d="
+            M140,60
+            C175,48 200,70 212,118
+            C218,132 230,142 222,152
+            C214,158 210,164 210,172
+            C230,182 252,200 254,230
+            C256,258 232,272 200,276
+            C184,280 176,290 173,305
+            C171,318 178,330 196,338
+            C220,346 248,350 270,362
+            L270,380
+            L70,380
+            C75,355 85,330 92,305
+            C98,278 88,240 88,200
+            C88,160 95,110 112,80
+            C120,70 130,64 140,60
+            Z
           "/>
+          <path class="intro-ear-fill" d="
+            M192,168
+            C202,164 210,172 209,185
+            C208,198 198,206 189,201
+            C183,197 182,188 184,180
+            C186,174 188,171 192,168
+            Z
+          "/>
+          <g class="intro-hairline">
+            <path d="M148,66 C160,60 172,58 182,60"/>
+            <path d="M138,80 C152,74 166,72 178,74"/>
+            <path d="M128,96 C142,90 156,88 170,90"/>
+            <path d="M120,114 C134,108 148,106 162,108"/>
+          </g>
         </svg>
         <svg class="intro-scissors" viewBox="0 0 100 120">
           <g class="intro-blade intro-blade-a">
@@ -556,10 +595,13 @@
           <span class="intro-hair ih1"></span>
           <span class="intro-hair ih2"></span>
           <span class="intro-hair ih3"></span>
+          <span class="intro-hair ih4"></span>
+          <span class="intro-hair ih5"></span>
+          <span class="intro-hair ih6"></span>
         </div>
       </div>
-      <div class="intro-logo"><img src="images/logo.png" alt="Cribbs Style"></div>
     </div>
+    <div class="intro-logo-wrap"><img src="images/logo.png" alt="Cribbs Style"></div>
   </div>
 
   <script>
@@ -585,14 +627,14 @@
     }
     window.addEventListener('load', revealHero);
 
+    /* Plays on every full page load (no visit-tracking storage of any kind —
+       only prefers-reduced-motion, an accessibility signal, skips it). */
     (function () {
       var intro = document.getElementById('introScreen');
-      var seen;
-      try { seen = sessionStorage.getItem('cribbsIntroSeen'); } catch (e) { seen = '1'; }
 
-      if (seen || reduceMotion) {
+      if (reduceMotion) {
         intro.classList.add('intro-skip');
-        setTimeout(revealHeroWhenReady, reduceMotion ? 0 : 500);
+        setTimeout(revealHeroWhenReady, 0);
         return;
       }
 
@@ -602,9 +644,8 @@
       setTimeout(function () {
         intro.classList.add('intro-skip');
         document.documentElement.classList.remove('intro-lock');
-        try { sessionStorage.setItem('cribbsIntroSeen', '1'); } catch (e) {}
         revealHero();
-      }, 3250);
+      }, 4000);
     })();
   </script>
 

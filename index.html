@@ -129,38 +129,37 @@
   html.intro-lock, html.intro-lock body { overflow: hidden; height: 100%; }
   .intro-screen { position: fixed; inset: 0; z-index: 99999; background: #050505; display: flex; align-items: center; justify-content: center; }
   .intro-screen.intro-skip { display: none !important; }
-  .intro-stage { position: relative; width: min(40vw, 260px); aspect-ratio: 230/320; }
+  .intro-stage { position: relative; width: min(42vw, 240px); aspect-ratio: 200/300; }
   .intro-portrait-group, .intro-scissors-group { position: absolute; inset: 0; }
   .intro-head { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .intro-head-fill, .intro-ear-fill { stroke-width: 1.5; opacity: 0; }
-  .intro-head-fill { fill: url(#introFillGrad); stroke: url(#introGrad); }
-  .intro-ear-fill { fill: url(#introFillGrad); stroke: url(#introGrad); stroke-width: 1; }
-  .intro-hairline { fill: none; stroke: #0a0908; stroke-width: 2; stroke-linecap: round; opacity: 0; }
-  .intro-hairline-light { fill: none; stroke: url(#introGrad); stroke-width: 1.2; stroke-linecap: round; opacity: 0; }
-  .intro-beardline { fill: none; stroke: #0a0908; stroke-width: 1.6; stroke-linecap: round; opacity: 0; }
-  .intro-scissors { position: absolute; top: 6.4%; left: 32.9%; width: 32%; height: 32%; overflow: visible; transform-origin: 50% 7.5%; opacity: 0; }
+  .intro-face-fill, .intro-hair-fill, .intro-mustache-fill { stroke-width: 1.5; opacity: 0; }
+  .intro-face-fill, .intro-hair-fill { fill: url(#introFillGrad); stroke: url(#introGrad); }
+  .intro-mustache-fill { fill: url(#introFillGrad); stroke: url(#introGrad); stroke-width: 1.3; }
+  .intro-feature { fill: none; stroke: url(#introGrad); stroke-width: 2; stroke-linecap: round; opacity: 0; }
+  .intro-feature-soft { fill: none; stroke: #0a0908; stroke-width: 1.6; stroke-linecap: round; opacity: 0; }
+  .intro-scissors { position: absolute; top: 2.2%; left: 32%; width: 34%; height: 27.2%; overflow: visible; transform-origin: 50% 7.5%; opacity: 0; }
   .intro-blade path, .intro-blade ellipse { fill: none; stroke: #cabb9c; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
   .intro-blade-a, .intro-blade-b { transform-origin: 50px 55px; }
   .intro-blade-a { transform: rotate(14deg); }
   .intro-blade-b { transform: rotate(-14deg); }
   .intro-hairs { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
   .intro-hair { position: absolute; width: 9px; height: 2px; border-radius: 2px; background: #cabb9c; opacity: 0; }
-  .intro-hair.ih1 { top: 6%; left: 46%; }
-  .intro-hair.ih2 { top: 7%; left: 50%; }
-  .intro-hair.ih3 { top: 5%; left: 48%; }
-  .intro-hair.ih4 { top: 7%; left: 52%; }
-  .intro-hair.ih5 { top: 6%; left: 44%; }
-  .intro-hair.ih6 { top: 8%; left: 49%; }
+  .intro-hair.ih1 { top: 3%; left: 46%; }
+  .intro-hair.ih2 { top: 4%; left: 52%; }
+  .intro-hair.ih3 { top: 2%; left: 49%; }
+  .intro-hair.ih4 { top: 4%; left: 54%; }
+  .intro-hair.ih5 { top: 3%; left: 43%; }
+  .intro-hair.ih6 { top: 5%; left: 50%; }
   .intro-logo-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(1.08); }
   .intro-glow { position: absolute; width: 240px; height: 240px; border-radius: 50%; background: radial-gradient(closest-side, rgba(202,187,156,0.24), rgba(202,187,156,0) 72%); }
   .intro-logo-wrap img { position: relative; height: 118px; width: auto; }
   @media (max-width: 480px) { .intro-logo-wrap img { height: 86px; } .intro-glow { width: 180px; height: 180px; } }
 
-  .intro-screen.intro-run .intro-head-fill,
-  .intro-screen.intro-run .intro-ear-fill,
-  .intro-screen.intro-run .intro-hairline,
-  .intro-screen.intro-run .intro-hairline-light,
-  .intro-screen.intro-run .intro-beardline { animation: introFillIn 550ms ease 100ms forwards; }
+  .intro-screen.intro-run .intro-face-fill,
+  .intro-screen.intro-run .intro-hair-fill,
+  .intro-screen.intro-run .intro-mustache-fill,
+  .intro-screen.intro-run .intro-feature,
+  .intro-screen.intro-run .intro-feature-soft { animation: introFillIn 550ms ease 100ms forwards; }
   .intro-screen.intro-run .intro-scissors { animation: introScissorsIn 270ms cubic-bezier(.3,0,.2,1) 630ms forwards; }
   .intro-screen.intro-run .intro-blade-a { animation: snipA1 180ms ease-in-out 850ms forwards, snipA2 180ms ease-in-out 1030ms forwards, snipA3 150ms ease-in-out 1190ms forwards; }
   .intro-screen.intro-run .intro-blade-b { animation: snipB1 180ms ease-in-out 850ms forwards, snipB2 180ms ease-in-out 1030ms forwards, snipB3 150ms ease-in-out 1190ms forwards; }
@@ -176,8 +175,8 @@
   .intro-screen.intro-run { animation: introScreenOut 400ms cubic-bezier(.6,0,.4,1) 2500ms forwards; }
 
   @keyframes introFillIn { to { opacity: 1; } }
-  @keyframes introScissorsIn { 0% { opacity: 0; transform: rotate(200deg) translate(0,-20px); } 100% { opacity: 1; transform: rotate(200deg) translate(0,0); } }
-  @keyframes introScissorsOut { to { opacity: 0; transform: rotate(200deg) translate(0,-20px); } }
+  @keyframes introScissorsIn { 0% { opacity: 0; transform: rotate(190deg) translate(0,-20px); } 100% { opacity: 1; transform: rotate(190deg) translate(0,0); } }
+  @keyframes introScissorsOut { to { opacity: 0; transform: rotate(190deg) translate(0,-20px); } }
   @keyframes snipA1 { 0% { transform: rotate(14deg); } 50% { transform: rotate(-3deg); } 100% { transform: rotate(14deg); } }
   @keyframes snipB1 { 0% { transform: rotate(-14deg); } 50% { transform: rotate(3deg); } 100% { transform: rotate(-14deg); } }
   @keyframes snipA2 { 0% { transform: rotate(14deg); } 50% { transform: rotate(-3deg); } 100% { transform: rotate(14deg); } }
@@ -223,15 +222,15 @@
   .nav-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 22px 0; gap: 24px; }
   .nav-logo { display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(-8px); transition: opacity 950ms cubic-bezier(.16,.84,.44,1), transform 950ms cubic-bezier(.16,.84,.44,1); }
   nav#siteNav.loaded .nav-logo { opacity: 1; transform: none; transition-delay: 100ms; }
-  .nav-logo img { height: 44px; width: auto; display: block; transition: height 350ms ease; animation: logoBreathe 7s ease-in-out infinite; }
-  nav#siteNav.is-scrolled .nav-logo img { height: 34px; }
+  .nav-logo img { height: 58px; width: auto; display: block; transition: height 350ms ease; animation: logoBreathe 7s ease-in-out infinite; }
+  nav#siteNav.is-scrolled .nav-logo img { height: 44px; }
   @keyframes logoBreathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.018); } }
   @media (prefers-reduced-motion: reduce) { .nav-logo img { animation: none; } }
   .nav-links { display: flex; align-items: center; gap: 40px; opacity: 0; transform: translateY(-8px); transition: opacity 950ms cubic-bezier(.16,.84,.44,1), transform 950ms cubic-bezier(.16,.84,.44,1); transition-delay: 220ms; }
   nav#siteNav.loaded .nav-links { opacity: 1; transform: none; }
   .nav-links-left { justify-content: flex-end; }
   .nav-links-right { justify-content: flex-start; }
-  .nav-links a { position: relative; font-size: 0.83rem; font-weight: 500; letter-spacing: 0.02em; color: var(--dim-2); transition: color 240ms ease; }
+  .nav-links a { position: relative; font-size: 0.95rem; font-weight: 500; letter-spacing: 0.02em; color: var(--dim-2); transition: color 240ms ease; }
   .nav-links a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px; background: var(--beige); transform: scaleX(0); transform-origin: center; transition: transform 320ms ease; }
   .nav-links a:hover { color: var(--ink); }
   .nav-links a:hover::after { transform: scaleX(1); }
@@ -545,7 +544,7 @@
   <div class="intro-screen" id="introScreen" aria-hidden="true">
     <div class="intro-stage">
       <div class="intro-portrait-group">
-        <svg class="intro-head" viewBox="60 30 230 320">
+        <svg class="intro-head" viewBox="50 25 200 300">
           <defs>
             <linearGradient id="introGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#f3efe7"/>
@@ -556,47 +555,60 @@
               <stop offset="100%" stop-color="#0b0b0c"/>
             </linearGradient>
           </defs>
-          <path class="intro-head-fill" d="
-            M140,60
-            C175,48 200,70 212,118
-            C218,132 230,142 222,152
-            C214,158 210,164 210,172
-            C230,182 252,200 254,230
-            C256,258 232,272 200,276
-            C184,280 176,290 173,305
-            C171,318 174,328 180,336
-            L96,336
-            C90,326 87,313 88,298
-            C90,270 86,230 88,190
-            C88,155 95,112 112,80
-            C120,70 130,64 140,60
+          <path class="intro-face-fill" d="
+            M150,95
+            C185,96 210,105 222,130
+            C232,155 235,180 232,205
+            C229,230 220,255 200,272
+            C185,283 168,288 158,292
+            C160,300 159,308 159,315
+            L141,315
+            C141,308 140,300 142,292
+            C132,288 115,283 100,272
+            C80,255 71,230 68,205
+            C65,180 68,155 78,130
+            C90,105 115,96 150,95
             Z
           "/>
-          <path class="intro-ear-fill" d="
-            M192,168
-            C202,164 210,172 209,185
-            C208,198 198,206 189,201
-            C183,197 182,188 184,180
-            C186,174 188,171 192,168
+          <path class="intro-hair-fill" d="
+            M150,28
+            C190,29 222,45 235,72
+            C244,90 240,110 225,128
+            C212,136 198,130 188,120
+            C180,113 170,110 150,110
+            C130,110 120,113 112,120
+            C102,130 88,136 75,128
+            C60,110 56,90 65,72
+            C78,45 110,29 150,28
             Z
           "/>
-          <g class="intro-hairline">
-            <path d="M130,64 C145,56 160,54 172,58"/>
-            <path d="M122,78 C140,68 158,62 172,66"/>
-            <path d="M115,94 C134,82 154,74 170,78"/>
-            <path d="M110,112 C128,98 148,88 166,92"/>
-            <path d="M107,132 C124,116 144,104 160,108"/>
-          </g>
-          <g class="intro-hairline-light">
-            <path d="M137,70 C150,62 163,60 174,64"/>
-            <path d="M128,86 C144,74 160,68 173,72"/>
-            <path d="M120,102 C137,90 154,82 168,86"/>
-          </g>
-          <g class="intro-beardline">
-            <path d="M198,190 C210,196 220,206 224,220"/>
-            <path d="M195,210 C208,216 218,226 222,240"/>
-            <path d="M190,230 C202,236 210,246 212,258"/>
-            <path d="M182,250 C192,256 198,264 198,272"/>
+          <path class="intro-feature" d="M112,158 C120,152 130,150 140,152"/>
+          <path class="intro-feature" d="M188,158 C180,152 170,150 160,152"/>
+          <path class="intro-feature" d="M114,170 C119,166 128,166 133,170"/>
+          <path class="intro-feature" d="M186,170 C181,166 172,166 167,170"/>
+          <path class="intro-feature-soft" d="M147,178 C144,190 142,200 145,208 C146,211 150,212 154,210"/>
+          <path class="intro-mustache-fill" d="
+            M150,214
+            C144,210 132,208 120,212
+            C108,216 100,224 98,232
+            C104,228 112,225 120,226
+            C128,227 136,224 141,218
+            C144,215 147,214 150,214
+            C153,214 156,215 159,218
+            C164,224 172,227 180,226
+            C188,225 196,228 202,232
+            C200,224 192,216 180,212
+            C168,208 156,210 150,214
+            Z
+          "/>
+          <g class="intro-feature-soft">
+            <path d="M85,190 C90,205 92,222 90,238"/>
+            <path d="M100,215 C104,230 105,246 100,260"/>
+            <path d="M118,235 C120,248 119,260 113,270"/>
+            <path d="M215,190 C210,205 208,222 210,238"/>
+            <path d="M200,215 C196,230 195,246 200,260"/>
+            <path d="M182,235 C180,248 181,260 187,270"/>
+            <path d="M150,240 C150,252 150,264 150,274"/>
           </g>
         </svg>
         <div class="intro-scissors-group">

@@ -125,6 +125,50 @@
   }
 
 
+  /* ── CINEMATIC INTRO (first visit only) ── */
+  html.intro-lock, html.intro-lock body { overflow: hidden; height: 100%; }
+  .intro-screen { position: fixed; inset: 0; z-index: 950; background: #000; display: flex; align-items: center; justify-content: center; }
+  .intro-screen.intro-skip { display: none !important; }
+  .intro-stage { position: relative; width: min(46vw, 300px); aspect-ratio: 320/360; }
+  .intro-portrait { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .intro-portrait-path { fill: none; stroke: url(#introGrad); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .intro-scissors { position: absolute; top: 53.8%; left: 53.5%; width: 38.2%; height: 40.7%; overflow: visible; transform-origin: 50% 7.5%; opacity: 0; }
+  .intro-blade path, .intro-blade ellipse { fill: none; stroke: #cabb9c; stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+  .intro-blade-a, .intro-blade-b { transform-origin: 50px 55px; }
+  .intro-blade-a { transform: rotate(14deg); }
+  .intro-blade-b { transform: rotate(-14deg); }
+  .intro-hairs { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
+  .intro-hair { position: absolute; width: 11px; height: 2px; border-radius: 2px; background: #cabb9c; opacity: 0; }
+  .intro-hair.ih1 { top: 56%; left: 74%; }
+  .intro-hair.ih2 { top: 58%; left: 71%; }
+  .intro-hair.ih3 { top: 55%; left: 77%; }
+  .intro-logo { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.92); }
+  .intro-logo img { height: 56px; width: auto; }
+
+  .intro-screen.intro-run .intro-portrait-path { animation: introDraw 1100ms cubic-bezier(.5,0,.3,1) 150ms forwards; }
+  .intro-screen.intro-run .intro-scissors { animation: introScissorsIn 400ms cubic-bezier(.3,0,.2,1) 1150ms forwards; }
+  .intro-screen.intro-run .intro-blade-a { animation: snipA 260ms ease-in-out 1450ms forwards; }
+  .intro-screen.intro-run .intro-blade-b { animation: snipB 260ms ease-in-out 1450ms forwards; }
+  .intro-screen.intro-run .intro-hair.ih1 { animation: hairFall1 420ms cubic-bezier(.4,0,.7,1) 1650ms forwards; }
+  .intro-screen.intro-run .intro-hair.ih2 { animation: hairFall2 450ms cubic-bezier(.4,0,.7,1) 1680ms forwards; }
+  .intro-screen.intro-run .intro-hair.ih3 { animation: hairFall3 390ms cubic-bezier(.4,0,.7,1) 1660ms forwards; }
+  .intro-screen.intro-run .intro-portrait-group { animation: introGroupOut 350ms ease 2000ms forwards; }
+  .intro-screen.intro-run .intro-logo { animation: introLogoIn 400ms cubic-bezier(.16,.84,.44,1) 1950ms forwards; }
+  .intro-screen.intro-run { animation: introScreenOut 400ms cubic-bezier(.6,0,.4,1) 2850ms forwards; }
+
+  @keyframes introDraw { to { stroke-dashoffset: 0; } }
+  @keyframes introScissorsIn { 0% { opacity: 0; transform: rotate(-95deg) translate(16px,-12px); } 100% { opacity: 1; transform: rotate(-95deg) translate(0,0); } }
+  @keyframes snipA { 0% { transform: rotate(14deg); } 55% { transform: rotate(-3deg); } 100% { transform: rotate(6deg); } }
+  @keyframes snipB { 0% { transform: rotate(-14deg); } 55% { transform: rotate(3deg); } 100% { transform: rotate(-6deg); } }
+  @keyframes hairFall1 { 0% { opacity: 1; transform: translate(0,0) rotate(0deg); } 100% { opacity: 0; transform: translate(9px, 60px) rotate(80deg); } }
+  @keyframes hairFall2 { 0% { opacity: 1; transform: translate(0,0) rotate(0deg); } 100% { opacity: 0; transform: translate(-6px, 66px) rotate(-70deg); } }
+  @keyframes hairFall3 { 0% { opacity: 1; transform: translate(0,0) rotate(0deg); } 100% { opacity: 0; transform: translate(12px, 54px) rotate(60deg); } }
+  @keyframes introGroupOut { to { opacity: 0; } }
+  @keyframes introLogoIn { to { opacity: 1; transform: scale(1); } }
+  @keyframes introScreenOut { to { opacity: 0; visibility: hidden; } }
+
+  @media (prefers-reduced-motion: reduce) { .intro-screen { display: none !important; } }
+
   /* ── PAGE-LOAD REVEAL (blade wipe) ── */
   .blade-reveal { position: fixed; inset: 0; z-index: 800; background: var(--bg) url('images/intro-still.jpg') center 32% / cover no-repeat; animation: bladeUp 1.1s cubic-bezier(.76,0,.24,1) .6s forwards; }
   .blade-reveal::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,12,0.3) 0%, rgba(11,11,12,0.55) 100%); }
@@ -472,6 +516,97 @@
 </style>
 </head>
 <body>
+
+  <noscript><style>.intro-screen{display:none!important}</style></noscript>
+
+  <div class="intro-screen" id="introScreen" aria-hidden="true">
+    <div class="intro-stage">
+      <div class="intro-portrait-group">
+        <svg class="intro-portrait" viewBox="0 0 320 360">
+          <defs>
+            <linearGradient id="introGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f3efe7"/>
+              <stop offset="100%" stop-color="#cabb9c"/>
+            </linearGradient>
+          </defs>
+          <path class="intro-portrait-path" pathLength="1" d="
+            M105,55
+            C140,45 168,55 180,85
+            C183,90 188,95 190,100
+            C198,112 212,125 224,142
+            C218,150 206,150 202,155
+            C204,159 206,162 203,166
+            C230,173 252,193 252,220
+            C252,248 230,268 195,272
+            C175,275 168,285 163,300
+            C158,315 145,325 125,335
+          "/>
+        </svg>
+        <svg class="intro-scissors" viewBox="0 0 100 120">
+          <g class="intro-blade intro-blade-a">
+            <ellipse cx="32" cy="95" rx="11" ry="8" transform="rotate(-20 32 95)"/>
+            <path d="M40,85 L50,55 L78,8"/>
+          </g>
+          <g class="intro-blade intro-blade-b">
+            <ellipse cx="68" cy="95" rx="11" ry="8" transform="rotate(20 68 95)"/>
+            <path d="M60,85 L50,55 L22,8"/>
+          </g>
+        </svg>
+        <div class="intro-hairs">
+          <span class="intro-hair ih1"></span>
+          <span class="intro-hair ih2"></span>
+          <span class="intro-hair ih3"></span>
+        </div>
+      </div>
+      <div class="intro-logo"><img src="images/logo.png" alt="Cribbs Style"></div>
+    </div>
+  </div>
+
+  <script>
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Hero + nav load state (text/logo reveal trigger) — gated behind the
+       intro below so the hero's own reveal plays fresh once the intro clears
+       instead of finishing silently underneath it. Guarded because this
+       script sits before .hero/#siteNav in the document — an immediate
+       (reduced-motion) call can otherwise fire before they exist. */
+    function revealHero() {
+      var hero = document.querySelector('.hero');
+      var nav = document.getElementById('siteNav');
+      if (hero) hero.classList.add('loaded');
+      if (nav) nav.classList.add('loaded');
+    }
+    function revealHeroWhenReady() {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', revealHero, { once: true });
+      } else {
+        revealHero();
+      }
+    }
+    window.addEventListener('load', revealHero);
+
+    (function () {
+      var intro = document.getElementById('introScreen');
+      var seen;
+      try { seen = sessionStorage.getItem('cribbsIntroSeen'); } catch (e) { seen = '1'; }
+
+      if (seen || reduceMotion) {
+        intro.classList.add('intro-skip');
+        setTimeout(revealHeroWhenReady, reduceMotion ? 0 : 500);
+        return;
+      }
+
+      document.documentElement.classList.add('intro-lock');
+      intro.classList.add('intro-run');
+
+      setTimeout(function () {
+        intro.classList.add('intro-skip');
+        document.documentElement.classList.remove('intro-lock');
+        try { sessionStorage.setItem('cribbsIntroSeen', '1'); } catch (e) {}
+        revealHero();
+      }, 3250);
+    })();
+  </script>
 
   <div class="blade-reveal" aria-hidden="true"></div>
 
@@ -923,15 +1058,6 @@
   </footer>
 
   <script>
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    /* Hero + nav load state (text/logo reveal trigger) */
-    function revealHero() {
-      document.querySelector('.hero').classList.add('loaded');
-      document.getElementById('siteNav').classList.add('loaded');
-    }
-    window.addEventListener('load', revealHero);
-    setTimeout(revealHero, reduceMotion ? 0 : 500);
 
     /* Scroll reveal — covers plain fades (.rv), staggered child cascades
        (.rv-stagger) and line-mask text reveals (.rv-mask) with one observer */

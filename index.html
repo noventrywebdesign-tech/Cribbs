@@ -447,20 +447,7 @@
   .loc-row span:first-child { color: var(--dim); font-size: 0.86rem; text-transform: uppercase; letter-spacing: 0.06em; }
   .loc-row span:last-child { font-weight: 600; text-align: right; }
   .loc-btns { display: flex; align-items: center; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
-  .book-call { display: inline-flex; align-items: center; gap: 14px; }
-  .book-call-number { color: var(--dim); font-size: 0.9rem; white-space: nowrap; }
-  @media (max-width: 700px) { .book-call-number { display: none; } }
-  .contact-form { display: flex; flex-direction: column; gap: 18px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-field label { display: block; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dim); margin-bottom: 9px; }
-  .form-field input, .form-field textarea { width: 100%; background: transparent; border: 1px solid var(--line); color: var(--ink); padding: 13px 16px; font-family: inherit; font-size: 0.95rem; transition: border-color 180ms; }
-  .form-field input:focus, .form-field textarea:focus { outline: none; border-color: var(--beige); }
-  .form-field textarea { resize: vertical; min-height: 120px; }
-  .form-honeypot { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }
-  .form-success { display: none; text-align: center; padding: 44px 24px; border: 1px solid var(--line); }
-  .form-success.show { display: block; }
-  .form-success strong { display: block; font-family: var(--font-d); font-size: 1.3rem; margin-bottom: 8px; }
-  .map-frame { position: relative; width: 100%; aspect-ratio: 21/8; border: 1px solid var(--line); overflow: hidden; }
+  .map-frame { position: relative; width: 100%; aspect-ratio: 1/1; border: 1px solid var(--line); overflow: hidden; }
   .map-frame iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.7) contrast(1.12) brightness(0.8); transition: filter var(--dur-slow) var(--ease); }
   .map-frame:hover iframe { filter: grayscale(0.4) contrast(1.08) brightness(0.92); }
   .map-frame::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,12,0.4), rgba(11,11,12,0.05) 45%, rgba(11,11,12,0.45)); pointer-events: none; }
@@ -470,7 +457,7 @@
   .map-pin-text strong { display: block; font-family: var(--font-d); font-size: 0.95rem; font-weight: 400; }
   .map-pin-text span { display: block; font-size: 0.8rem; color: var(--dim); margin-top: 2px; }
   @media (max-width: 700px) { .map-pin-card { left: 14px; bottom: 14px; padding: 12px 16px; } .map-pin-text span { font-size: 0.74rem; } }
-  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 50px; } .form-row { grid-template-columns: 1fr; } .map-frame { aspect-ratio: 4/3.4; } }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 50px; } .map-frame { aspect-ratio: 4/3.4; } }
 
   /* ── FOOTER ── */
   footer { padding: 90px 0 34px; border-top: 1px solid var(--line); }
@@ -874,67 +861,31 @@
   <section id="kontakt">
     <div class="wrap">
       <div class="eyebrow rv"><span class="num">09</span><span class="rule"></span>Kontakt</div>
-      <h2 class="title rv" style="margin-bottom:50px;">Komm vorbei –<br>oder schreib uns.</h2>
+      <h2 class="title rv" style="margin-bottom:50px;">Komm vorbei.</h2>
 
       <div class="contact-grid">
         <div class="rv">
           <div class="loc-row"><span>Adresse</span><span>Hauptstraße 267<br>58675 Hemer</span></div>
           <div class="loc-row"><span>Telefon</span><span><a href="tel:+491621388205">+49 162 1388205</a></span></div>
-          <div class="loc-row"><span>Instagram</span><span><a href="https://www.instagram.com/cribbs_style_/" target="_blank" rel="noopener">@cribbs_style_</a></span></div>
           <div class="loc-row"><span>Montag – Freitag</span><span>09:00 – 18:00 Uhr</span></div>
           <div class="loc-row"><span>Samstag</span><span>09:00 – 15:00 Uhr</span></div>
           <div class="loc-row"><span>Sonntag</span><span>Geschlossen</span></div>
           <div class="loc-btns">
-            <div class="book-call">
-              <a href="tel:+491621388205" class="btn btn-solid">Termin buchen</a>
-              <span class="book-call-number">+49 162 1388205</span>
-            </div>
+            <a href="tel:+491621388205" class="btn btn-solid">Termin buchen</a>
             <a href="https://www.google.com/maps/dir/?api=1&destination=Hauptstra%C3%9Fe%20267%2C%2058675%20Hemer" target="_blank" rel="noopener" class="btn btn-ghost">Route planen</a>
-            <a href="https://www.google.com/search?q=Cribbs+Style+Hauptstra%C3%9Fe+267+Hemer" target="_blank" rel="noopener" class="btn btn-ghost">Auf Google ansehen</a>
           </div>
         </div>
 
-        <div class="rv rv-d1">
-          <form class="contact-form" id="contact-form">
-            <div class="form-row">
-              <div class="form-field">
-                <label for="cf-name">Name</label>
-                <input type="text" id="cf-name" name="name" required autocomplete="name">
-              </div>
-              <div class="form-field">
-                <label for="cf-phone">Telefon</label>
-                <input type="tel" id="cf-phone" name="phone" autocomplete="tel">
-              </div>
-            </div>
-            <div class="form-field">
-              <label for="cf-email">E-Mail</label>
-              <input type="email" id="cf-email" name="email" required autocomplete="email">
-            </div>
-            <div class="form-field">
-              <label for="cf-msg">Nachricht</label>
-              <textarea id="cf-msg" name="message" placeholder="Wunschtermin, Style-Wunsch oder Frage …"></textarea>
-            </div>
-            <label class="form-honeypot" aria-hidden="true">
-              <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
-            </label>
-            <button type="submit" class="btn btn-solid" id="form-submit-btn">Nachricht senden</button>
-          </form>
-          <div class="form-success" id="contact-success">
-            <strong>Danke dir!</strong>
-            <p>Deine Nachricht ist angekommen – wir melden uns schnellstmöglich zurück.</p>
-          </div>
+        <div class="map-frame rv rv-d1">
+          <iframe src="https://maps.google.com/maps?q=Hauptstra%C3%9Fe%20267%2C%2058675%20Hemer&t=h&z=17&ie=UTF8&iwloc=&output=embed" title="Cribbs Style auf Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Hauptstra%C3%9Fe%20267%2C%2058675%20Hemer" target="_blank" rel="noopener" class="map-pin-card">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.58 2 4 5.58 4 10c0 5.25 7 12 8 12s8-6.75 8-12c0-4.42-3.58-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+            <span class="map-pin-text">
+              <strong>Cribbs Style</strong>
+              <span>Hauptstraße 267, 58675 Hemer</span>
+            </span>
+          </a>
         </div>
-      </div>
-
-      <div class="map-frame rv">
-        <iframe src="https://maps.google.com/maps?q=Hauptstra%C3%9Fe%20267%2C%2058675%20Hemer&t=h&z=17&ie=UTF8&iwloc=&output=embed" title="Cribbs Style auf Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Hauptstra%C3%9Fe%20267%2C%2058675%20Hemer" target="_blank" rel="noopener" class="map-pin-card">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.58 2 4 5.58 4 10c0 5.25 7 12 8 12s8-6.75 8-12c0-4.42-3.58-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
-          <span class="map-pin-text">
-            <strong>Cribbs Style</strong>
-            <span>Hauptstraße 267, 58675 Hemer</span>
-          </span>
-        </a>
       </div>
     </div>
   </section>
@@ -1174,59 +1125,6 @@
       });
     });
 
-    /* Contact form — Web3Forms submission.
-       WICHTIG: 'REPLACE_WITH_CRIBBS_WEB3FORMS_KEY' muss durch einen eigenen,
-       kostenlosen Access Key von https://web3forms.com ersetzt werden (mit der
-       E-Mail-Adresse von Cribbs Style registriert), sonst schlägt der Versand fehl. */
-    (function () {
-      var WEB3FORMS_ACCESS_KEY = 'REPLACE_WITH_CRIBBS_WEB3FORMS_KEY';
-      var form = document.getElementById('contact-form');
-      var successBox = document.getElementById('contact-success');
-      if (!form) return;
-      var submitBtn = document.getElementById('form-submit-btn');
-      var submitBtnHTML = submitBtn.innerHTML;
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (!form.checkValidity()) { form.reportValidity(); return; }
-
-        var name = document.getElementById('cf-name').value.trim();
-        var phone = document.getElementById('cf-phone').value.trim();
-        var email = document.getElementById('cf-email').value.trim();
-        var msg = document.getElementById('cf-msg').value.trim();
-        var botcheck = form.querySelector('input[name="botcheck"]').checked;
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Wird gesendet …';
-
-        fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            access_key: WEB3FORMS_ACCESS_KEY,
-            subject: 'Neue Terminanfrage von ' + name + ' – Cribbs Style',
-            from_name: 'Cribbs Style Website',
-            botcheck: botcheck,
-            'Name': name,
-            'E-Mail': email,
-            'Telefon': phone || '–',
-            'Nachricht': msg || '–',
-            replyto: email
-          })
-        }).then(function (res) { return res.json(); }).then(function (data) {
-          if (data.success) {
-            form.style.display = 'none';
-            successBox.classList.add('show');
-          } else {
-            throw new Error(data.message || 'Senden fehlgeschlagen');
-          }
-        }).catch(function (err) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = submitBtnHTML;
-          console.error('Web3Forms-Fehler:', err);
-          alert('Die Nachricht konnte leider nicht gesendet werden.\n\nBitte ruf uns stattdessen direkt an: +49 162 1388205.');
-        });
-      });
-    })();
   </script>
 </body>
 </html>
